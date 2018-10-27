@@ -3,15 +3,16 @@ import "./App.css";
 import "./DataTable.css";
 import DataTable from "./DataTable";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faTrashAlt, faPen } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faPen } from "@fortawesome/free-solid-svg-icons";
+import { columsMock, rowsMock } from "./mocks";
 
-library.add(faTrashAlt, faPen);
+library.add(faTrash, faPen);
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <DataTable />
+        <DataTable cols={columsMock} rows={rowsMock} />
       </div>
     );
   }
