@@ -1,0 +1,48 @@
+.data-table-wrapper {
+}
+
+.data-table-header {
+  background-color: var(--dark);
+  color: #ffdc00;
+  border-radius: 10px 10px 0 0;
+  padding: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-bottom: 1px solid;
+}
+
+.header-cell {
+  flex-basis: 20%;
+}
+
+.action-btn {
+  background-color: #ffdc00;
+  border: none;
+  border-radius: 50%;
+  color: var(--dark);
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.data-table-body {
+  margin: 0 auto;
+  background-color: var(--darkGrey);
+  border-radius: 0 0 10px 10px;
+}
+
+.data-table-row {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.data-table-row-cell {
+  flex-basis: 20%;
+}
