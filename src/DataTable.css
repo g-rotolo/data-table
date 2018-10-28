@@ -19,19 +19,10 @@
   flex-basis: 20%;
 }
 
-.action-btn {
-  background-color: var(--yellow);
-  border: none;
-  border-radius: 50%;
-  color: var(--dark);
-  padding: 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 18px;
-  margin: 4px 2px;
-  cursor: pointer;
-  outline: none;
+.top-btn-wrapper {
+  padding: 0 0 10px 0;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .data-table-body {
@@ -43,6 +34,10 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+}
+
+.no-rows {
+  padding: 40px 0 40px 0;
 }
 
 .data-table-row-cell {
@@ -62,6 +57,6 @@
   padding: 10px;
   flex-basis: 50%;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: baseline;
 }

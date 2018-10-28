@@ -1,4 +1,5 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./EditDialog.css";
 
 const EditDialog = ({ handleClose, show, title, handleConfirm, children }) => {
@@ -11,8 +12,16 @@ const EditDialog = ({ handleClose, show, title, handleConfirm, children }) => {
           <h3>{title}</h3>
         </header>
         <main>{children}</main>
-        <button onClick={handleClose}>close</button>
-        <button onClick={handleConfirm}>confirm</button>
+        <footer>
+          <button title="Close" onClick={handleClose} className="rect-btn">
+            <FontAwesomeIcon icon="times" />
+            <span style={{ marginLeft: "5px" }}>Close</span>
+          </button>
+          <button title="Save" onClick={handleConfirm} className="rect-btn">
+            <FontAwesomeIcon icon="save" />
+            <span style={{ marginLeft: "5px" }}>Save</span>
+          </button>
+        </footer>
       </section>
     </div>
   );

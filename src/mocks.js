@@ -2,17 +2,20 @@ module.exports.columsMock = [
   {
     name: "column_1",
     displayName: "Column 1",
-    editable: true
+    editable: true,
+    isNew: false
   },
   {
     name: "column_2",
     displayName: "Column 2",
-    editable: false
+    editable: false,
+    isNew: false
   },
   {
     name: "column_3",
     displayName: "Column 3",
-    editable: false
+    editable: false,
+    isNew: false
   }
 ];
 

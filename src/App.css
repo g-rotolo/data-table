@@ -19,3 +19,50 @@ html {
   font-family: "Montserrat", sans-serif;
   font-size: 14px;
 }
+
+.display-block {
+  display: block;
+}
+
+.display-none {
+  display: none;
+}
+
+.rect-btn {
+  cursor: pointer;
+  width: 80px;
+  height: 40px;
+  color: var(--yellow);
+  background-color: var(--deepMatteGrey);
+  margin: 10px;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  font-weight: bold;
+  font-family: "Montserrat", sans-serif;
+  outline: none;
+}
+
+.rect-btn.big.yellow {
+  color: var(--deepMatteGrey);
+  width: 125px;
+  background-color: var(--yellow);
+  margin: 0;
+}
+
+.action-btn {
+  background-color: var(--yellow);
+  border: none;
+  border-radius: 50%;
+  color: var(--dark);
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  margin: 4px 2px;
+  cursor: pointer;
+  outline: none;
+}

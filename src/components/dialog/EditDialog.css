@@ -25,18 +25,16 @@
   border-radius: 10px 10px 0 0;
 }
 
-main {
+.modal-main main {
   padding: 20px;
+}
+
+.modal-main footer {
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
 }
 
 .modal-header h3 {
   margin: 0;
-}
-
-.display-block {
-  display: block;
-}
-
-.display-none {
-  display: none;
 }
