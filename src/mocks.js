@@ -18,18 +18,21 @@ module.exports.columsMock = [
 
 module.exports.rowsMock = [
   {
-    column_1: "Row content 1",
-    column_2: "Row content 1",
-    column_3: "Row content 1"
+    id: 1,
+    column_1: "Row content 1a",
+    column_2: "Row content 1b",
+    column_3: "Row content 1c"
   },
   {
-    column_1: "Row content 2",
-    column_2: "Row content 2",
-    column_3: "Row content 2"
+    id: 2,
+    column_1: "Row content 2a",
+    column_2: "Row content 2b",
+    column_3: "Row content 2c"
   },
   {
-    column_1: "Row content 3",
-    column_2: "Row content 3",
-    column_3: "Row content 3"
+    id: 3,
+    column_1: "Row content 3a",
+    column_2: "Row content 3b",
+    column_3: "Row content 3c"
   }
 ];

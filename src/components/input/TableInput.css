@@ -1,0 +1,8 @@
+input {
+  width: 250px;
+  font-size: 14px;
+  border-width: 0 0 1px 0;
+  border-color: var(--dark);
+  background-color: transparent;
+  outline-color: var(--yellow);
+}

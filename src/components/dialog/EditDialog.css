@@ -1,0 +1,42 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.modal-main {
+  position: fixed;
+  background: var(--darkGrey);
+  width: 35%;
+  height: auto;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 0 0 10px 10px;
+}
+
+.modal-header {
+  text-align: center;
+  color: var(--yellow);
+  background-color: var(--deepMatteGrey);
+  padding: 10px;
+  border-radius: 10px 10px 0 0;
+}
+
+main {
+  padding: 20px;
+}
+
+.modal-header h3 {
+  margin: 0;
+}
+
+.display-block {
+  display: block;
+}
+
+.display-none {
+  display: none;
+}

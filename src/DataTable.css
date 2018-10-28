@@ -1,9 +1,11 @@
 .data-table-wrapper {
+  margin: 30px auto;
+  max-width: 960px;
 }
 
 .data-table-header {
-  background-color: var(--dark);
-  color: #ffdc00;
+  background-color: var(--deepMatteGrey);
+  color: var(--yellow);
   border-radius: 10px 10px 0 0;
   padding: 10px;
   display: flex;
@@ -18,7 +20,7 @@
 }
 
 .action-btn {
-  background-color: #ffdc00;
+  background-color: var(--yellow);
   border: none;
   border-radius: 50%;
   color: var(--dark);
@@ -29,10 +31,10 @@
   font-size: 18px;
   margin: 4px 2px;
   cursor: pointer;
+  outline: none;
 }
 
 .data-table-body {
-  margin: 0 auto;
   background-color: var(--darkGrey);
 }
 
@@ -48,10 +50,18 @@
 }
 
 .data-table-footer {
-  background-color: var(--dark);
-  color: #ffdc00;
+  background-color: var(--deepMatteGrey);
+  color: var(--yellow);
   padding: 10px;
   border-radius: 0 0 10px 10px;
   border-top: 2px solid;
   text-align: center;
+}
+
+.modal-row {
+  padding: 10px;
+  flex-basis: 50%;
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
 }
