@@ -17,7 +17,7 @@ library.add(faPlus, faTrash, faPen, faTimes, faSave);
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div id="app-container" className="App">
         <DataTable cols={columsMock} rows={rowsMock} />
       </div>
     );

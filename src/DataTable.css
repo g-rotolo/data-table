@@ -36,6 +36,10 @@
   justify-content: space-evenly;
 }
 
+.data-table-row:nth-child(even) {
+  background-color: #ececec;
+}
+
 .no-rows {
   padding: 40px 0 40px 0;
 }

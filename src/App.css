@@ -45,6 +45,11 @@ html {
   outline: none;
 }
 
+.rect-btn:hover {
+  background-color: var(--yellow);
+  color: var(--deepMatteGrey);
+}
+
 .rect-btn.big.yellow {
   color: var(--deepMatteGrey);
   width: 125px;
@@ -52,11 +57,16 @@ html {
   margin: 0;
 }
 
+.rect-btn.big.yellow:hover {
+  background-color: var(--deepMatteGrey);
+  color: var(--yellow);
+}
+
 .action-btn {
   background-color: var(--yellow);
   border: none;
   border-radius: 50%;
-  color: var(--dark);
+  color: var(--deepMatteGrey);
   padding: 10px;
   text-align: center;
   text-decoration: none;
@@ -65,4 +75,13 @@ html {
   margin: 4px 2px;
   cursor: pointer;
   outline: none;
+}
+
+.action-btn:hover {
+  background-color: var(--deepMatteGrey);
+  color: var(--yellow);
+}
+
+.blur {
+  opacity: 0.5;
 }

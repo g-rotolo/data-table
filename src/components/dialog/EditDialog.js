@@ -3,7 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./EditDialog.css";
 
 const EditDialog = ({ handleClose, show, title, handleConfirm, children }) => {
-  const showHideClassName = show ? "modal display-block" : "modal display-none";
+  const showHideClassName = show
+    ? "modal display-block modal-fade-in"
+    : "modal display-none";
+
+  console.log(showHideClassName);
 
   return (
     <div className={showHideClassName}>

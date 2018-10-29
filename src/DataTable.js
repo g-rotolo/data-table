@@ -23,6 +23,14 @@ class DataTable extends Component {
     });
   }
 
+  // Todo refactoring
+  // change App file to be DataTable
+  // move the dialog outside the table container
+  // applyBlur = () => {
+  //   const app = document.getElementById("app-container");
+  //   app.className = "App blur";
+  // };
+
   showEditModal = row => {
     this.setState({ selectedRow: row, showEditModal: true });
   };
