@@ -4,6 +4,10 @@ Installation:
 
 - clone the repository using git clone, then make npm install for the dependencies.
 
+To see it on the web:
+
+https://morning-thicket-77374.herokuapp.com/
+
 Functionalities:
 
 - possibility to add and remove rows
