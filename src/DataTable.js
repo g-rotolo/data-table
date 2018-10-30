@@ -3,36 +3,64 @@ import "./DataTable.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TableInput from "./components/input/TableInput";
 import EditDialog from "./components/dialog/EditDialog";
+import CSVCreator from "./components/CSVCreator/CSVCreator";
+
+// Mock data, remove and use props when linked with API
+import { columsMock, rowsMock } from "./mocks";
+
+import "./style/main.css";
+import "./DataTable.css";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+  faPlus,
+  faTrash,
+  faPen,
+  faTimes,
+  faSave,
+  faFileCsv
+} from "@fortawesome/free-solid-svg-icons";
+
+library.add(faPlus, faTrash, faPen, faTimes, faSave, faFileCsv);
 
 class DataTable extends Component {
-  state = {
-    cols: [],
-    rows: [],
-    selectedRow: {},
-    newCol: {},
-    newRow: {},
-    showEditModal: false,
-    showAddRowModal: false,
-    showAddColumnModal: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      cols: [],
+      rows: [],
+      selectedRow: {},
+      newCol: {},
+      newRow: {},
+      showEditModal: false,
+      showAddRowModal: false,
+      showAddColumnModal: false,
+      blur: false
+    };
+  }
 
   componentDidMount() {
     this.setState({
-      cols: this.props.cols,
-      rows: this.props.rows
+      cols: columsMock,
+      rows: rowsMock
     });
   }
 
-  // Todo refactoring
-  // change App file to be DataTable
-  // move the dialog outside the table container
-  // applyBlur = () => {
-  //   const app = document.getElementById("app-container");
-  //   app.className = "App blur";
-  // };
+  generateCSVData = () => {
+    const cols = [...this.state.cols];
+    const rows = [...this.state.rows];
+    const csvData = [];
+    rows.forEach(row => {
+      let obj = {};
+      cols.forEach(col => {
+        obj[col.name] = row[col.name];
+      });
+      csvData.push(obj);
+    });
+    return csvData;
+  };
 
   showEditModal = row => {
-    this.setState({ selectedRow: row, showEditModal: true });
+    this.setState({ selectedRow: row, showEditModal: true, blur: true });
   };
 
   hideEditModal = () => {
@@ -46,7 +74,8 @@ class DataTable extends Component {
     if (index !== -1) {
       this.setState({
         selectedRow,
-        showEditModal: false
+        showEditModal: false,
+        blur: false
       });
     }
   };
@@ -56,30 +85,53 @@ class DataTable extends Component {
       newRow: {},
       newCol: {},
       showAddColumnModal: false,
-      showAddRowModal: false
+      showAddRowModal: false,
+      blur: false
+    });
+  };
+
+  removeCol = index => {
+    const cols = [...this.state.cols];
+    cols.splice(index, 1);
+    if (cols.length === 0) {
+      this.setState({
+        cols,
+        rows: []
+      });
+      return;
+    }
+    this.setState({
+      cols
     });
   };
 
   renderColumns = () => {
+    if (this.state.cols.length === 0) {
+      return <div>There are no columns to display, try adding a new one!</div>;
+    }
     return this.state.cols.map((col, index) => (
       <div key={`column_${index}`} className="header-cell">
         {col.displayName}
+        <button title="Delete column" onClick={() => this.removeCol(index)}>
+          <FontAwesomeIcon icon="times" />
+        </button>
       </div>
     ));
   };
 
   renderRows = () => {
     const rows = [...this.state.rows];
-    if (rows.length === 0) {
+    const cols = [...this.state.cols];
+    if (rows.length === 0 || cols.length === 0) {
       return (
         <div className="data-table-row no-rows">
           There are no rows to display
         </div>
       );
     }
-    return this.state.rows.map((row, index) => (
+    return rows.map((row, index) => (
       <div key={`row_${index}`} className="data-table-row">
-        {this.state.cols.map(col => (
+        {cols.map(col => (
           <div key={`row_${col.name}`} className="data-table-row-cell">
             {row[col.name]}
           </div>
@@ -159,7 +211,8 @@ class DataTable extends Component {
     if (index !== -1) {
       this.setState({
         rows,
-        showEditModal: false
+        showEditModal: false,
+        blur: false
       });
     }
   };
@@ -175,7 +228,7 @@ class DataTable extends Component {
   handleAddNewColumn = () => {
     const cols = [...this.state.cols];
     cols.push(this.state.newCol);
-    this.setState({ newCol: {}, cols, showAddColumnModal: false });
+    this.setState({ newCol: {}, cols, showAddColumnModal: false, blur: false });
   };
 
   handleAddNewRow = () => {
@@ -183,37 +236,52 @@ class DataTable extends Component {
     const rows = [...this.state.rows];
     newRow.id = rows.length + 1;
     rows.push(newRow);
-    this.setState({ newRow: {}, rows, showAddRowModal: false });
+    this.setState({ newRow: {}, rows, showAddRowModal: false, blur: false });
   };
 
   render() {
+    const csvData = this.generateCSVData();
+    const blurTable = this.state.blur
+      ? "data-table-wrapper blur"
+      : "data-table-wrapper";
+    const cols = [...this.state.cols];
     return (
-      <div className="data-table-wrapper">
-        <div className="top-btn-wrapper">
-          <button
-            style={{ marginRight: "10px" }}
-            title="Add a row"
-            onClick={() => this.setState({ showAddRowModal: true })}
-            className="rect-btn big yellow right"
-          >
-            <FontAwesomeIcon icon="plus" />
-            <span style={{ marginLeft: "5px" }}>Add row</span>
-          </button>
-          <button
-            title="Add a column"
-            onClick={() => this.setState({ showAddColumnModal: true })}
-            className="rect-btn big yellow right"
-          >
-            <FontAwesomeIcon icon="plus" />
-            <span style={{ marginLeft: "5px" }}>Add column</span>
-          </button>
+      <div className="main-wrapper">
+        <div id="data-table-wrapper" className={blurTable}>
+          <div className="top-btn-wrapper">
+            <CSVCreator csvData={csvData} />
+            <button
+              style={{ marginRight: "10px" }}
+              title="Add a row"
+              disabled={cols === 0}
+              onClick={() =>
+                this.setState({ showAddRowModal: true, blur: true })
+              }
+              className="rect-btn big yellow right"
+            >
+              <FontAwesomeIcon icon="plus" />
+              <span style={{ marginLeft: "5px" }}>Add row</span>
+            </button>
+            <button
+              title="Add a column"
+              onClick={() =>
+                this.setState({ showAddColumnModal: true, blur: true })
+              }
+              className="rect-btn big yellow right"
+            >
+              <FontAwesomeIcon icon="plus" />
+              <span style={{ marginLeft: "5px" }}>Add column</span>
+            </button>
+          </div>
+          <div className="data-table-header">
+            {this.renderColumns()}
+            {this.state.rows.length > 0 && (
+              <div className="header-cell">Actions</div>
+            )}
+          </div>
+          <div className="data-table-body">{this.renderRows()}</div>
+          <div className="data-table-footer">Footer Wannabe!</div>
         </div>
-        <div className="data-table-header">
-          {this.renderColumns()}
-          <div className="header-cell">Actions</div>
-        </div>
-        <div className="data-table-body">{this.renderRows()}</div>
-        <div className="data-table-footer">Footer Wannabe!</div>
         <EditDialog
           title="Edit row"
           show={this.state.showEditModal}
@@ -228,7 +296,7 @@ class DataTable extends Component {
           handleClose={this.hideAddModals}
           handleConfirm={this.handleAddNewRow}
         >
-          {this.state.cols.map(col => (
+          {cols.map(col => (
             <div className="modal-row" key={`fieldRow_${col.name}`}>
               <div style={{ flexBasis: "25%", fontWeight: "bold" }}>
                 {col.displayName}

@@ -7,8 +7,6 @@ const EditDialog = ({ handleClose, show, title, handleConfirm, children }) => {
     ? "modal display-block modal-fade-in"
     : "modal display-none";
 
-  console.log(showHideClassName);
-
   return (
     <div className={showHideClassName}>
       <section className="modal-main">

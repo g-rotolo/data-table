@@ -15,7 +15,17 @@ html {
   color: var(--dark);
 }
 
-.App {
+button {
+  outline: none;
+}
+
+.main-wrapper .data-table-wrapper button:disabled {
+  background-color: var(--darkGrey);
+  color: rgba(104, 104, 104, 0.8);
+  cursor: default;
+}
+
+.main-wrapper {
   font-family: "Montserrat", sans-serif;
   font-size: 14px;
 }
@@ -45,7 +55,7 @@ html {
   outline: none;
 }
 
-.rect-btn:hover {
+.rect-btn:hover:enabled {
   background-color: var(--yellow);
   color: var(--deepMatteGrey);
 }
@@ -57,7 +67,7 @@ html {
   margin: 0;
 }
 
-.rect-btn.big.yellow:hover {
+.rect-btn.big.yellow:hover:enabled {
   background-color: var(--deepMatteGrey);
   color: var(--yellow);
 }
@@ -77,7 +87,7 @@ html {
   outline: none;
 }
 
-.action-btn:hover {
+.action-btn:hover:active {
   background-color: var(--deepMatteGrey);
   color: var(--yellow);
 }
