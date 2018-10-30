@@ -22,7 +22,7 @@ button {
 .main-wrapper .data-table-wrapper button:disabled {
   background-color: var(--darkGrey);
   color: rgba(104, 104, 104, 0.8);
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .main-wrapper {

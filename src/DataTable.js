@@ -98,11 +98,11 @@ class DataTable extends Component {
         cols,
         rows: []
       });
-      return;
+    } else {
+      this.setState({
+        cols
+      });
     }
-    this.setState({
-      cols
-    });
   };
 
   renderColumns = () => {
@@ -253,7 +253,7 @@ class DataTable extends Component {
             <button
               style={{ marginRight: "10px" }}
               title="Add a row"
-              disabled={cols === 0}
+              disabled={cols.length === 0}
               onClick={() =>
                 this.setState({ showAddRowModal: true, blur: true })
               }
@@ -280,7 +280,7 @@ class DataTable extends Component {
             )}
           </div>
           <div className="data-table-body">{this.renderRows()}</div>
-          <div className="data-table-footer">Footer Wannabe!</div>
+          <div className="data-table-footer" />
         </div>
         <EditDialog
           title="Edit row"
