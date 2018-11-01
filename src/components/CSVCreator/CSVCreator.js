@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import TopButton from "../topButtons/topButton/TopButton";
 
 class CSVCreator extends Component {
   generateCSVData = (cols, rows) => {
@@ -68,17 +68,13 @@ class CSVCreator extends Component {
 
   render() {
     return (
-      <React.Fragment>
-        <button
-          style={{ marginRight: "10px" }}
-          title="Generate CSV"
-          onClick={() => this.downloadCSV({ filename: "data-table.csv" })}
-          className="rect-btn big yellow right"
-        >
-          <FontAwesomeIcon icon="file-csv" />
-          <span style={{ marginLeft: "5px" }}>CSV</span>
-        </button>
-      </React.Fragment>
+      <TopButton
+        title="Generate CSV"
+        onClick={() => this.downloadCSV({ filename: "data-table.csv" })}
+        className="rect-btn big yellow right"
+        icon="file-csv"
+        text="CSV"
+      />
     );
   }
 }

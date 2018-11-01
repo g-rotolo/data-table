@@ -22,4 +22,16 @@ describe("<TopButtons />", () => {
     expect(wrapper.find(CSVCreator)).toHaveLength(0);
     expect(wrapper.find(TopButton)).toHaveLength(0);
   });
+  it("shows an exact add row button if show is true", () => {
+    expect(
+      wrapper.contains(
+        <TopButton
+          title="Add a row"
+          className="rect-btn big yellow"
+          icon="plus"
+          text="Row"
+        />
+      )
+    );
+  });
 });
