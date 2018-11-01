@@ -5,3 +5,9 @@
   background-color: transparent;
   outline-color: var(--yellow);
 }
+
+.table-body-input.yellow {
+  font-weight: bold;
+  width: 85%;
+  color: var(--yellow);
+}

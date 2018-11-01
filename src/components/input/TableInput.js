@@ -5,7 +5,7 @@ const TableInput = props => {
   return (
     <React.Fragment>
       <input
-        className="table-body-input"
+        className={props.className}
         id={props.name}
         name={props.name}
         type={props.type}

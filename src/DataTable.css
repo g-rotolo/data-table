@@ -53,6 +53,14 @@
   border: none;
   cursor: pointer;
   vertical-align: top;
+  padding-left: 0;
+  padding-right: 2px;
+}
+
+.data-table-wrapper table thead .data-table-actions,
+.data-table-wrapper table tbody .data-table-actions {
+  width: 7%;
+  padding: 0;
 }
 
 .top-btn-wrapper {

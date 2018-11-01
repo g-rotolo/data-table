@@ -55,7 +55,7 @@ class CSVCreator extends Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         <button
           style={{ marginRight: "10px" }}
           title="Generate CSV"
@@ -63,9 +63,9 @@ class CSVCreator extends Component {
           className="rect-btn big yellow right"
         >
           <FontAwesomeIcon icon="file-csv" />
-          <span style={{ marginLeft: "5px" }}>Download CSV</span>
+          <span style={{ marginLeft: "5px" }}>CSV</span>
         </button>
-      </div>
+      </React.Fragment>
     );
   }
 }

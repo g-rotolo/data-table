@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./DataTable.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TableInput from "./components/input/TableInput";
-import CSVCreator from "./components/CSVCreator/CSVCreator";
+import TopButtons from "./components/topButtons/TopButtons";
 
 // Mock data, remove and use props when linked with API
 import { columsMock, rowsMock } from "./mocks";
@@ -26,10 +26,7 @@ class DataTable extends Component {
     super(props);
     this.state = {
       cols: [],
-      rows: [],
-      selectedRow: {},
-      newCol: {},
-      newRow: {}
+      rows: []
     };
   }
 
@@ -81,12 +78,21 @@ class DataTable extends Component {
       <tr>
         {this.state.cols.map((col, index) => (
           <th key={`col_${index}`}>
-            {col.displayName}
             <button title="Delete column" onClick={() => this.removeCol(index)}>
               <FontAwesomeIcon icon="times" />
             </button>
+            <TableInput
+              className="table-body-input yellow"
+              id={`col_data_${col.name}`}
+              name={`col_data_${col.name}`}
+              type={"text"}
+              placeholder="Insert a value"
+              onChange={e => this.handleEditColField(e, col.name, index)}
+              value={col.displayName || ""}
+            />
           </th>
         ))}
+        <th className="data-table-actions" />
       </tr>
     );
   };
@@ -103,19 +109,29 @@ class DataTable extends Component {
     }
     return rows.map((row, index) => (
       <tr key={`row_${index}`}>
-        {cols.map(col => (
-          <td key={`row_data_${col.name}`}>
+        {cols.map((col, colIndex) => (
+          <td key={`row_data_${index}${colIndex}`}>
             <TableInput
               className="table-body-input"
               id={`row_data_${col.name}`}
               name={`row_data_${col.name}`}
               type={"text"}
+              disabled={typeof col.name === "undefined"}
               placeholder="Insert a value"
               onChange={e => this.handleEditRowField(e, col.name, index)}
               value={row[col.name] || ""}
             />
           </td>
         ))}
+        <td className="data-table-actions">
+          <button
+            title="Delete row"
+            onClick={() => this.handleDeleteRow(index)}
+            className="action-btn"
+          >
+            <FontAwesomeIcon icon="trash" />
+          </button>
+        </td>
       </tr>
     ));
   };
@@ -135,18 +151,27 @@ class DataTable extends Component {
     });
   };
 
-  handleNewColumnInput = e => {
-    const newCol = {};
-    newCol.displayName = e.target.value;
-    newCol.name = e.target.value;
-    newCol.editable = true;
-    this.setState({ newCol });
+  handleEditColField = (e, originalColName, index) => {
+    const cols = [...this.state.cols];
+    const rows = [...this.state.rows];
+    const col = cols[index];
+    col.name = e.target.value;
+    col.displayName = e.target.value;
+    rows.forEach(row => {
+      row[e.target.value] = row[originalColName];
+      delete row[originalColName];
+    });
+    this.setState({
+      cols,
+      rows
+    });
   };
 
   handleAddNewColumn = () => {
     const cols = [...this.state.cols];
-    cols.push(this.state.newCol);
-    this.setState({ newCol: {}, cols, showAddColumnModal: false, blur: false });
+    const newCol = {};
+    cols.push(newCol);
+    this.setState({ cols });
   };
 
   handleAddNewRow = () => {
@@ -163,38 +188,18 @@ class DataTable extends Component {
     return (
       <div className="main-wrapper">
         <div id="data-table-wrapper" className="data-table-wrapper">
-          <div className="top-btn-wrapper">
-            <CSVCreator csvData={csvData} />
-            <button
-              style={{ marginRight: "10px" }}
-              title="Add a row"
-              disabled={cols.length === 0}
-              onClick={() => this.handleAddNewRow()}
-              className="rect-btn big yellow right"
-            >
-              <FontAwesomeIcon icon="plus" />
-              <span style={{ marginLeft: "5px" }}>Add row</span>
-            </button>
-            <button
-              title="Add a column"
-              onClick={() =>
-                this.setState({ showAddColumnModal: true, blur: true })
-              }
-              className="rect-btn big yellow right"
-            >
-              <FontAwesomeIcon icon="plus" />
-              <span style={{ marginLeft: "5px" }}>Add column</span>
-            </button>
-          </div>
+          <TopButtons
+            show={true}
+            disabledAddCol={cols.length === 0}
+            csvData={csvData}
+            handleAddNewRow={this.handleAddNewRow}
+            handleAddNewColumn={this.handleAddNewColumn}
+          />
           <table>
             <thead>{this.renderColumns()}</thead>
             <tbody>{this.renderRows()}</tbody>
             <tfoot>
-              <tr>
-                <td>Sum</td>
-                <td>$180</td>
-                <td>$180</td>
-              </tr>
+              <tr />
             </tfoot>
           </table>
         </div>
