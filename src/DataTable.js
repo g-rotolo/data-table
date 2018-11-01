@@ -37,20 +37,6 @@ class DataTable extends Component {
     });
   }
 
-  generateCSVData = () => {
-    const cols = [...this.state.cols];
-    const rows = [...this.state.rows];
-    const csvData = [];
-    rows.forEach(row => {
-      let obj = {};
-      cols.forEach(col => {
-        obj[col.name] = row[col.name];
-      });
-      csvData.push(obj);
-    });
-    return csvData;
-  };
-
   removeCol = index => {
     const cols = [...this.state.cols];
     cols.splice(index, 1);
@@ -183,24 +169,20 @@ class DataTable extends Component {
   };
 
   render() {
-    const csvData = this.generateCSVData();
-    const cols = [...this.state.cols];
     return (
       <div className="main-wrapper">
         <div id="data-table-wrapper" className="data-table-wrapper">
           <TopButtons
             show={true}
-            disabledAddCol={cols.length === 0}
-            csvData={csvData}
+            disabledAddCol={this.state.cols.length === 0}
+            cols={this.state.cols}
+            rows={this.state.rows}
             handleAddNewRow={this.handleAddNewRow}
             handleAddNewColumn={this.handleAddNewColumn}
           />
           <table>
             <thead>{this.renderColumns()}</thead>
             <tbody>{this.renderRows()}</tbody>
-            <tfoot>
-              <tr />
-            </tfoot>
           </table>
         </div>
       </div>

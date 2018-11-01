@@ -9,7 +9,7 @@ const TopButtons = props => {
   }
   return (
     <div className="top-btn-wrapper">
-      <CSVCreator csvData={props.csvData} />
+      <CSVCreator cols={props.cols} rows={props.rows} />
       <button
         style={{ marginRight: "10px" }}
         title="Add a row"

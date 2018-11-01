@@ -2,6 +2,18 @@ import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class CSVCreator extends Component {
+  generateCSVData = (cols, rows) => {
+    const csvData = [];
+    rows.forEach(row => {
+      let obj = {};
+      cols.forEach(col => {
+        obj[col.name] = row[col.name];
+      });
+      csvData.push(obj);
+    });
+    return csvData;
+  };
+
   convertArraytoCSV = args => {
     let result, ctr, keys, columnDelimiter, lineDelimiter, data;
 
@@ -34,9 +46,10 @@ class CSVCreator extends Component {
   };
 
   downloadCSV = args => {
-    var data, filename, link;
-    var csv = this.convertArraytoCSV({
-      data: this.props.csvData
+    let data, filename, link;
+    let formattedData = this.generateCSVData(this.props.cols, this.props.rows);
+    let csv = this.convertArraytoCSV({
+      data: formattedData
     });
     if (csv == null) return;
 
