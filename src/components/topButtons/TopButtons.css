@@ -25,6 +25,7 @@
   width: 10%;
   background-color: var(--yellow);
   margin: 0;
+  margin-right: 10px;
 }
 
 .rect-btn.big.yellow:hover:enabled {

@@ -68,6 +68,10 @@
   justify-content: flex-end;
 }
 
+.top-btn-wrapper .rect-btn.big.yellow:last-child {
+  margin-right: 0;
+}
+
 .no-rows {
   padding: 40px 0 40px 0;
 }

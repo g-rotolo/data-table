@@ -162,6 +162,8 @@ class DataTable extends Component {
 
   handleAddNewRow = () => {
     const rows = [...this.state.rows];
+    const cols = [...this.state.cols];
+    if (cols.length === 0) return;
     const newRow = {};
     newRow.id = rows.length + 1;
     rows.push(newRow);
@@ -174,7 +176,6 @@ class DataTable extends Component {
         <div id="data-table-wrapper" className="data-table-wrapper">
           <TopButtons
             show={true}
-            disabledAddCol={this.state.cols.length === 0}
             cols={this.state.cols}
             rows={this.state.rows}
             handleAddNewRow={this.handleAddNewRow}

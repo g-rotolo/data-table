@@ -1,6 +1,6 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CSVCreator from "../CSVCreator/CSVCreator";
+import TopButton from "./topButton/TopButton";
 import "./TopButtons.css";
 
 const TopButtons = props => {
@@ -10,24 +10,20 @@ const TopButtons = props => {
   return (
     <div className="top-btn-wrapper">
       <CSVCreator cols={props.cols} rows={props.rows} />
-      <button
-        style={{ marginRight: "10px" }}
+      <TopButton
         title="Add a row"
-        disabled={props.disabledAddCol}
-        onClick={() => props.handleAddNewRow()}
-        className="rect-btn big yellow right"
-      >
-        <FontAwesomeIcon icon="plus" />
-        <span style={{ marginLeft: "5px" }}>Row</span>
-      </button>
-      <button
+        onClick={props.handleAddNewRow}
+        className="rect-btn big yellow"
+        icon="plus"
+        text="Row"
+      />
+      <TopButton
         title="Add a column"
         onClick={() => props.handleAddNewColumn()}
-        className="rect-btn big yellow right"
-      >
-        <FontAwesomeIcon icon="plus" />
-        <span style={{ marginLeft: "5px" }}>Col</span>
-      </button>
+        className="rect-btn big yellow"
+        icon="plus"
+        text="Col"
+      />
     </div>
   );
 };
