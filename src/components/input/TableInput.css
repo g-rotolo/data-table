@@ -1,8 +1,7 @@
-input {
-  width: 250px;
+.table-body-input {
+  width: 100%;
   font-size: 14px;
-  border-width: 0 0 1px 0;
-  border-color: var(--dark);
+  border: none;
   background-color: transparent;
   outline-color: var(--yellow);
 }

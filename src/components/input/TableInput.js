@@ -3,12 +3,9 @@ import "./TableInput.css";
 
 const TableInput = props => {
   return (
-    <div className="form-group">
-      <label htmlFor={props.name} className="form-label">
-        {props.title}
-      </label>
+    <React.Fragment>
       <input
-        className="form-input"
+        className="table-body-input"
         id={props.name}
         name={props.name}
         type={props.type}
@@ -17,7 +14,7 @@ const TableInput = props => {
         onChange={props.onChange}
         placeholder={props.placeholder}
       />
-    </div>
+    </React.Fragment>
   );
 };
 

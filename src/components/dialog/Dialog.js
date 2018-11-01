@@ -1,8 +1,8 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./EditDialog.css";
+import "./Dialog.css";
 
-const EditDialog = ({ handleClose, show, title, handleConfirm, children }) => {
+const Dialog = ({ handleClose, show, title, handleConfirm, children }) => {
   const showHideClassName = show
     ? "modal display-block modal-fade-in"
     : "modal display-none";
@@ -29,4 +29,4 @@ const EditDialog = ({ handleClose, show, title, handleConfirm, children }) => {
   );
 };
 
-export default EditDialog;
+export default Dialog;

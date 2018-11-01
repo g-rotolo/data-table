@@ -87,7 +87,7 @@ button {
   outline: none;
 }
 
-.action-btn:hover:active {
+.action-btn:hover {
   background-color: var(--deepMatteGrey);
   color: var(--yellow);
 }
