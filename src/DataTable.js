@@ -3,11 +3,6 @@ import "./DataTable.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TableInput from "./components/input/TableInput";
 import TopButtons from "./components/topButtons/TopButtons";
-
-// Mock data, remove and use props when linked with API
-import { columsMock, rowsMock } from "./mocks";
-
-import "./style/main.css";
 import "./DataTable.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -32,8 +27,8 @@ class DataTable extends Component {
 
   componentDidMount() {
     this.setState({
-      cols: columsMock,
-      rows: rowsMock
+      cols: this.props.cols,
+      rows: this.props.rows
     });
   }
 
@@ -53,73 +48,84 @@ class DataTable extends Component {
   };
 
   renderColumns = () => {
-    if (this.state.cols.length === 0) {
+    if (Array.isArray(this.state.cols)) {
+      if (this.state.cols.length === 0) {
+        return (
+          <tr className="data-table-row no-rows">
+            <td>There are no columns to display, try adding a new one!</td>
+          </tr>
+        );
+      }
       return (
-        <tr className="data-table-row no-rows">
-          <td>There are no columns to display, try adding a new one!</td>
+        <tr>
+          {this.state.cols.map((col, index) => (
+            <th key={`col_${index}`}>
+              <button
+                title="Delete column"
+                onClick={() => this.removeCol(index)}
+              >
+                <FontAwesomeIcon icon="times" />
+              </button>
+              <TableInput
+                className="table-body-input yellow"
+                id={`col_data_${col.name}`}
+                name={`col_data_${col.name}`}
+                type={"text"}
+                placeholder="Insert a value"
+                onChange={e => this.handleEditColField(e, col.name, index)}
+                value={col.displayName || ""}
+              />
+            </th>
+          ))}
+          <th className="data-table-actions" />
         </tr>
       );
+    } else {
+      return null;
     }
-    return (
-      <tr>
-        {this.state.cols.map((col, index) => (
-          <th key={`col_${index}`}>
-            <button title="Delete column" onClick={() => this.removeCol(index)}>
-              <FontAwesomeIcon icon="times" />
-            </button>
-            <TableInput
-              className="table-body-input yellow"
-              id={`col_data_${col.name}`}
-              name={`col_data_${col.name}`}
-              type={"text"}
-              placeholder="Insert a value"
-              onChange={e => this.handleEditColField(e, col.name, index)}
-              value={col.displayName || ""}
-            />
-          </th>
-        ))}
-        <th className="data-table-actions" />
-      </tr>
-    );
   };
 
   renderRows = () => {
-    const rows = [...this.state.rows];
-    const cols = [...this.state.cols];
-    if (rows.length === 0 || cols.length === 0) {
-      return (
-        <tr className="data-table-row no-rows">
-          <td>There are no rows to display</td>
-        </tr>
-      );
-    }
-    return rows.map((row, index) => (
-      <tr key={`row_${index}`}>
-        {cols.map((col, colIndex) => (
-          <td key={`row_data_${index}${colIndex}`}>
-            <TableInput
-              className="table-body-input"
-              id={`row_data_${col.name}`}
-              name={`row_data_${col.name}`}
-              type={"text"}
-              disabled={typeof col.name === "undefined"}
-              placeholder="Insert a value"
-              onChange={e => this.handleEditRowField(e, col.name, index)}
-              value={row[col.name] || ""}
-            />
+    if (Array.isArray(this.state.cols) && Array.isArray(this.state.rows)) {
+      const rows = [...this.state.rows];
+      const cols = [...this.state.cols];
+      if (rows.length === 0 || cols.length === 0) {
+        return (
+          <tr className="data-table-row no-rows">
+            <td>There are no rows to display</td>
+          </tr>
+        );
+      }
+      return rows.map((row, index) => (
+        <tr key={`row_${index}`}>
+          {cols.map((col, colIndex) => (
+            <td key={`row_data_${index}${colIndex}`}>
+              <TableInput
+                className="table-body-input"
+                id={`row_data_${col.name}`}
+                name={`row_data_${col.name}`}
+                type={"text"}
+                disabled={typeof col.name === "undefined"}
+                placeholder="Insert a value"
+                onChange={e => this.handleEditRowField(e, col.name, index)}
+                value={row[col.name] || ""}
+              />
+            </td>
+          ))}
+          <td className="data-table-actions">
+            <button
+              title="Delete row"
+              onClick={() => this.handleDeleteRow(index)}
+              className="action-btn"
+            >
+              <FontAwesomeIcon icon="trash" />
+            </button>
           </td>
-        ))}
-        <td className="data-table-actions">
-          <button
-            title="Delete row"
-            onClick={() => this.handleDeleteRow(index)}
-            className="action-btn"
-          >
-            <FontAwesomeIcon icon="trash" />
-          </button>
-        </td>
-      </tr>
-    ));
+        </tr>
+      ));
+    } else {
+      return null;
+    }
   };
 
   handleDeleteRow = index => {
